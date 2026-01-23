@@ -4,7 +4,9 @@
   "description": "Support ticket app",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node backend/server.js",
+    "server": "nodemon backend/server.js"
+
   },
   "repository": {
     "type": "git",
@@ -15,5 +17,15 @@
   "bugs": {
     "url": "https://github.com/frontendmyfriend/support-desk-2/issues"
   },
-  "homepage": "https://github.com/frontendmyfriend/support-desk-2#readme"
+  "homepage": "https://github.com/frontendmyfriend/support-desk-2#readme",
+  "dependencies": {
+    "bcryptjs": "^3.0.3",
+    "colors": "^1.4.0",
+    "dotenv": "^17.2.3",
+    "express": "^5.2.1",
+    "mongoose": "^9.1.5"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.11"
+  }
 }
