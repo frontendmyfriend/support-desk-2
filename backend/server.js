@@ -1,27 +1,28 @@
-const express = require('express');
+const express = require('express')
 const dotenv = require('dotenv').config()
 const colors = require('colors')
-const {errorHandler} =  require('./middleware/errorMiddleware')
+const cors = require('cors')
+const { errorHandler } = require('./middleware/errorMiddleware')
 const connectDB = require('./config/db')
 
 const PORT = process.env.PORT || 8000
 
-//connect to db
 connectDB()
 
-const app = express();
+const app = express()
 
+app.use(cors({ origin: 'http://localhost:5173' }))
 app.use(express.json())
-app.use(express.urlencoded({extended:false}))
+app.use(express.urlencoded({ extended: false }))
 
-
-app.get('/', (req,res)=>{ 
-    res.status(200).json({message:'Welcome to hell'})
+app.get('/', (req, res) => {
+  res.status(200).json({ message: 'Welcome to hell' })
 })
 
-//Routes
 app.use('/api/users', require('./routes/userRoutes'))
 
 app.use(errorHandler)
 
-app.listen(PORT, ()=> console.log(`server started on port ${PORT}`))
+app.listen(PORT, () =>
+  console.log(`server started on port ${PORT}`.cyan)
+)
