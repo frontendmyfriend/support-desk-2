@@ -88,7 +88,7 @@ useEffect(()=>{
               value={password}
               name="password"
               onChange={onChange}
-              placeholder="Create your password"
+              placeholder="Enter your password"
               required
             ></input>
           </div>
