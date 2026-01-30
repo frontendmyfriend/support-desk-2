@@ -27,17 +27,18 @@ const getTickets = async (token) => {
 };
 
 
-//get ticket
+// Get user ticket
 const getTicket = async (ticketId, token) => {
   const config = {
     headers: {
       Authorization: `Bearer ${token}`,
     },
-  };
+  }
 
-  const response = await axios.get(API_URL + ticketId, config);
-  return response.data;
-};
+  const response = await axios.get(API_URL + ticketId, config)
+
+  return response.data
+}
 
 
 //close ticket
