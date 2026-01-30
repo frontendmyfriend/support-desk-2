@@ -1,4 +1,5 @@
 const express = require('express')
+const path = require('path')
 const dotenv = require('dotenv').config()
 const colors = require('colors')
 const cors = require('cors')
@@ -23,6 +24,24 @@ app.get('/', (req, res) => {
 app.use('/api/users', require('./routes/userRoutes'))
 app.use('/api/tickets', require('./routes/ticketRoutes'))
 
+
+
+
+//serve frontend
+if(import.meta.env.NODE_ENV === 'production'){
+  //set static folder
+  app.use(express.static(path.join(__dirname, '../frontend/build')))
+
+  app.get('*', (req, res) => {
+    res.sendFile(
+      path.resolve(__dirname, '../', 'frontend', 'build', 'index.html')
+    )
+  })
+}else{
+  app.get('/', (req, res) => {
+  res.status(200).json({ message: 'Welcome to the hell' })
+})
+}
 
 
 
