@@ -9,23 +9,29 @@ const Note = require("../models/noteModel");
 //@route   GET /api/tickets/:ticketId/notes
 //@access  Private
 const getNotes = asyncHandler(async (req, res) => {
-  //Get user using the id in the JWT
-  const user = await User.findById(req.user.id);
+  const user = await User.findById(req.user.id)
+
   if (!user) {
-    res.status(401);
-    throw new Error("User not found");
+    res.status(401)
+    throw new Error("User not found")
   }
+
   const ticket = await Ticket.findById(req.params.ticketId)
 
-  if(ticket.user.toString() !== req.user.id){
-    res.status(401)
-    throw new Error('user not authorized')
+  if (!ticket) {
+    res.status(404)
+    throw new Error('Ticket not found')
   }
 
-  const notes = await Note.find({ticket:req.params.ticketId})
+  if (ticket.user.toString() !== req.user.id) {
+    res.status(401)
+    throw new Error('User not authorized')
+  }
 
-  res.status(200).json(notes);
-});
+  const notes = await Note.find({ ticket: req.params.ticketId })
+
+  res.status(200).json(notes)
+})
 
 //@desc.   create Note for the ticket______________________________________________________
 //@route   POST /api/tickets/:ticketId/notes
